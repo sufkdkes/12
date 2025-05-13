@@ -1,22 +1,149 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>홍길동의 포트폴리오</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이현수의 기록장장</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; }
-    h1 { color: #222277; }
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0f2027;
+      background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+      color: #e0e0e0;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #ff4081;
+    }
+    header {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #b0bec5;
+    }
+    nav {
+      margin-top: 20px;
+    }
+    nav a {
+      margin: 0 15px;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    main {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      margin-bottom: 40px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #00bcd4;
+      padding-bottom: 5px;
+    }
+    .projects ul {
+      list-style: none;
+    }
+    .projects li {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+    .projects a {
+      font-weight: 700;
+    }
+    .contact p {
+      font-size: 1.1rem;
+    }
+    footer {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid #37474f;
+      color: #78909c;
+      font-size: 0.9rem;
+    }
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      main {
+        padding: 20px;
+      }
+      nav a {
+        margin: 0 10px;
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>홍길동</h1>
-  <p>웹 개발자 | 프론트엔드 & 백엔드</p>
-  <h2>프로젝트</h2>
-  <ul>
-    <li><a href="https://github.com/username/project1">Project 1</a> - React 기반 웹앱</li>
-    <li><a href="https://github.com/username/project2">Project 2</a> - Django API 서버</li>
-  </ul>
-  <h2>연락처</h2>
-  <p>Email: hong@example.com</p>
+  <header>
+    <h1>홍길동</h1>
+    <p>상위 1% 개발자 | 프론트엔드 & 백엔드 전문가</p>
+    <nav>
+      <a href="#about">소개</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#contact">연락처</a>
+    </nav>
+  </header>
+  <main>
+    <section id="about">
+      <h2>소개</h2>
+      <p>안녕하세요! 저는 최신 웹 기술과 클린 코드를 중시하는 상위 1% 개발자 홍길동입니다. 다양한 프로젝트 경험과 깊은 기술적 이해를 바탕으로 고품질의 웹 애플리케이션을 개발합니다.</p>
+    </section>
+    <section id="projects" class="projects">
+      <h2>프로젝트</h2>
+      <ul>
+        <li><a href="https://github.com/username/project1" target="_blank" rel="noopener">Project 1</a> - React 기반 대규모 SPA 개발</li>
+        <li><a href="https://github.com/username/project2" target="_blank" rel="noopener">Project 2</a> - Node.js와 Express를 활용한 RESTful API 서버</li>
+        <li><a href="https://github.com/username/project3" target="_blank" rel="noopener">Project 3</a> - AWS Lambda를 이용한 서버리스 아키텍처 구축</li>
+      </ul>
+    </section>
+    <section id="contact" class="contact">
+      <h2>연락처</h2>
+      <p>Email: honggildong@example.com</p>
+      <p>GitHub: <a href="https://github.com/username" target="_blank" rel="noopener">https://github.com/username</a></p>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 홍길동. All rights reserved.
+  </footer>
 </body>
 </html>
