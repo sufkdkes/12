@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>홍길동의 포트폴리오</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1 { color: #222277; }
+  </style>
+</head>
+<body>
+  <h1>홍길동</h1>
+  <p>웹 개발자 | 프론트엔드 & 백엔드</p>
+  <h2>프로젝트</h2>
+  <ul>
+    <li><a href="https://github.com/username/project1">Project 1</a> - React 기반 웹앱</li>
+    <li><a href="https://github.com/username/project2">Project 2</a> - Django API 서버</li>
+  </ul>
+  <h2>연락처</h2>
+  <p>Email: hong@example.com</p>
+</body>
+</html>
