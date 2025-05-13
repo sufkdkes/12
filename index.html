@@ -3,18 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>상위 1% 개발자 포트폴리오</title>
+  <title>상위 1% 개발자 포트폴리오 - 반응형 UI 포함</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
-      background: #f0f8ff; /* AliceBlue 배경 */
-      color: #003366; /* Dark Blue 텍스트 */
+      background: #f0f8ff;
+      color: #003366;
       line-height: 1.6;
       min-height: 100vh;
       display: flex;
@@ -23,18 +19,17 @@
       padding: 20px;
     }
     a {
-      color: #1e90ff; /* DodgerBlue 링크 색상 */
+      color: #1e90ff;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 0.3s;
     }
-    a:hover {
-      color: #104e8b; /* Darker Blue on hover */
-    }
+    a:hover { color: #104e8b; }
     header {
       width: 100%;
       max-width: 900px;
       text-align: center;
       margin-bottom: 40px;
+      position: relative;
     }
     header h1 {
       font-size: 3rem;
@@ -46,51 +41,165 @@
       font-size: 1.2rem;
       color: #336699;
     }
-    nav {
-      margin-top: 20px;
+    /* 반응형 네비게이션 */
+    .nav-toggle { display: none; }
+    .nav-toggle-label {
+      display: none;
+      position: absolute;
+      top: 25px;
+      right: 20px;
+      height: 30px;
+      width: 30px;
+      cursor: pointer;
+      z-index: 2;
     }
+    .nav-toggle-label span,
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+      display: block;
+      background: #1e90ff;
+      height: 3px;
+      width: 30px;
+      border-radius: 3px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+      content: '';
+      position: absolute;
+    }
+    .nav-toggle-label span::before { top: -10px; }
+    .nav-toggle-label span::after { top: 10px; }
+    nav { position: relative; }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+    }
+    nav li { margin: 0 15px; }
     nav a {
-      margin: 0 15px;
       font-weight: 500;
       font-size: 1rem;
+      padding: 6px 0;
+    }
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      .nav-toggle-label { display: block; }
+      nav ul {
+        position: fixed;
+        top: 0; right: 0;
+        height: 100vh; width: 200px;
+        background: #f0f8ff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.3s;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        z-index: 1;
+      }
+      .nav-toggle:checked + .nav-toggle-label span { background: transparent; }
+      .nav-toggle:checked + .nav-toggle-label span::before {
+        transform: rotate(45deg); top: 0;
+      }
+      .nav-toggle:checked + .nav-toggle-label span::after {
+        transform: rotate(-45deg); top: 0;
+      }
+      .nav-toggle:checked ~ nav ul { transform: translateX(0); }
+      nav li { margin: 20px 0; }
+      nav a { font-size: 1.2rem; }
     }
     main {
       width: 100%;
       max-width: 900px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255,255,255,0.9);
       border-radius: 10px;
       padding: 30px;
-      box-shadow: 0 8px 32px 0 rgba(30, 144, 255, 0.37);
+      box-shadow: 0 8px 32px 0 rgba(30,144,255,0.18);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       margin-bottom: 40px;
       color: #003366;
     }
-    section {
-      margin-bottom: 40px;
-    }
+    section { margin-bottom: 40px; }
     section h2 {
       font-size: 2rem;
       margin-bottom: 20px;
       border-bottom: 2px solid #1e90ff;
       padding-bottom: 5px;
     }
+    /* 프로젝트 카드형 그리드 */
     .projects ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 0;
       list-style: none;
     }
     .projects li {
-      margin-bottom: 15px;
-      font-size: 1.1rem;
+      background: #e6f0ff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(30,144,255,0.18);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .projects li:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 8px 25px rgba(30,144,255,0.28);
     }
     .projects a {
+      color: #003366;
       font-weight: 700;
-    }
-    .contact p {
+      text-decoration: underline;
+      margin-bottom: 10px;
       font-size: 1.1rem;
-      margin: 8px 0;
     }
-    .contact a {
-      color: #1e90ff;
+    /* 연락처 섹션 */
+    .contact p { font-size: 1.1rem; margin: 8px 0; }
+    .contact a { color: #1e90ff; }
+    /* 연락처 폼 */
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 400px;
+      margin-top: 20px;
+    }
+    .contact label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .contact input {
+      padding: 10px;
+      border: 1px solid #1e90ff;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    .contact input:focus {
+      border-color: #104e8b;
+      outline: none;
+    }
+    .contact button {
+      background: #1e90ff;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact button:hover {
+      background: #104e8b;
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2.2rem; }
+      main { padding: 20px; }
+      .contact form { max-width: 100%; }
     }
     footer {
       width: 100%;
@@ -101,28 +210,22 @@
       color: #336699;
       font-size: 0.9rem;
     }
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
-      main {
-        padding: 20px;
-      }
-      nav a {
-        margin: 0 10px;
-        font-size: 0.9rem;
-      }
-    }
   </style>
 </head>
 <body>
   <header>
     <h1>홍길동</h1>
     <p>상위 1% 개발자 | 프론트엔드 & 백엔드 전문가</p>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
     <nav>
-      <a href="#about">소개</a>
-      <a href="#projects">프로젝트</a>
-      <a href="#contact">연락처</a>
+      <ul>
+        <li><a href="#about">소개</a></li>
+        <li><a href="#projects">프로젝트</a></li>
+        <li><a href="#contact">연락처</a></li>
+      </ul>
     </nav>
   </header>
   <main>
@@ -133,9 +236,18 @@
     <section id="projects" class="projects">
       <h2>프로젝트</h2>
       <ul>
-        <li><a href="https://github.com/username/project1" target="_blank" rel="noopener">Project 1</a> - React 기반 대규모 SPA 개발</li>
-        <li><a href="https://github.com/username/project2" target="_blank" rel="noopener">Project 2</a> - Node.js와 Express를 활용한 RESTful API 서버</li>
-        <li><a href="https://github.com/username/project3" target="_blank" rel="noopener">Project 3</a> - AWS Lambda를 이용한 서버리스 아키텍처 구축</li>
+        <li>
+          <a href="https://github.com/username/project1" target="_blank" rel="noopener">Project 1</a>
+          <span>React 기반 대규모 SPA 개발</span>
+        </li>
+        <li>
+          <a href="https://github.com/username/project2" target="_blank" rel="noopener">Project 2</a>
+          <span>Node.js와 Express를 활용한 RESTful API 서버</span>
+        </li>
+        <li>
+          <a href="https://github.com/username/project3" target="_blank" rel="noopener">Project 3</a>
+          <span>AWS Lambda를 이용한 서버리스 아키텍처 구축</span>
+        </li>
       </ul>
     </section>
     <section id="contact" class="contact">
@@ -143,6 +255,15 @@
       <p>블로그: <a href="https://yourblog.com" target="_blank" rel="noopener">https://yourblog.com</a></p>
       <p>인스타그램: <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener">https://instagram.com/yourprofile</a></p>
       <p>이메일: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+      <form>
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" />
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" />
+        <label for="message">메시지</label>
+        <input type="text" id="message" name="message" placeholder="메시지를 입력하세요" />
+        <button type="submit">보내기</button>
+      </form>
     </section>
   </main>
   <footer>
