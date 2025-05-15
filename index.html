@@ -3,53 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>상위 1% 개발자 포트폴리오 - 반응형 UI 포함</title>
+  <title>상위 1% 개발자 이현수 포트폴리오</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --primary: #1e90ff;
+      --primary-dark: #104e8b;
+      --bg: #f0f8ff;
+      --card-bg: #e6f0ff;
+      --accent: #00c6ae;
+      --text: #003366;
+      --shadow: 0 8px 32px 0 rgba(30,144,255,0.18);
+      --radius: 14px;
+      --transition: 0.3s cubic-bezier(.4,2,.6,1);
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
-      background: #f0f8ff;
-      color: #003366;
-      line-height: 1.6;
+      background: linear-gradient(135deg, var(--bg) 60%, #ecf9ff 100%);
+      color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 20px;
+      transition: background 0.5s;
     }
     a {
-      color: #1e90ff;
+      color: var(--primary);
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color var(--transition);
     }
-    a:hover { color: #104e8b; }
+    a:hover { color: var(--primary-dark); }
+
     header {
       width: 100%;
-      max-width: 900px;
+      max-width: 1000px;
       text-align: center;
       margin-bottom: 40px;
       position: relative;
+      padding: 40px 0 10px 0;
+      background: rgba(255,255,255,0.85);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 0;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 8px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 0 0 40px 40px;
+      opacity: 0.8;
     }
     header h1 {
       font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 10px;
       letter-spacing: 2px;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     header p {
       font-size: 1.2rem;
-      color: #336699;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
     }
-    /* 반응형 네비게이션 */
+    header .info {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 18px;
+    }
+
+    /* 네비게이션 */
     .nav-toggle { display: none; }
     .nav-toggle-label {
       display: none;
       position: absolute;
-      top: 25px;
-      right: 20px;
-      height: 30px;
-      width: 30px;
+      top: 30px; right: 30px;
+      height: 34px; width: 34px;
       cursor: pointer;
       z-index: 2;
     }
@@ -57,31 +93,42 @@
     .nav-toggle-label span::before,
     .nav-toggle-label span::after {
       display: block;
-      background: #1e90ff;
-      height: 3px;
-      width: 30px;
+      background: var(--primary);
+      height: 4px;
+      width: 34px;
       border-radius: 3px;
       position: relative;
-      transition: all 0.3s ease;
+      transition: all var(--transition);
     }
     .nav-toggle-label span::before,
     .nav-toggle-label span::after {
       content: '';
       position: absolute;
     }
-    .nav-toggle-label span::before { top: -10px; }
-    .nav-toggle-label span::after { top: 10px; }
+    .nav-toggle-label span::before { top: -11px; }
+    .nav-toggle-label span::after { top: 11px; }
     nav { position: relative; }
     nav ul {
       display: flex;
       justify-content: center;
       list-style: none;
-    }
-    nav li { margin: 0 15px; }
-    nav a {
+      gap: 30px;
+      font-size: 1.1rem;
       font-weight: 500;
-      font-size: 1rem;
-      padding: 6px 0;
+      margin-bottom: 0;
+    }
+    nav li { }
+    nav a {
+      padding: 10px 0 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color var(--transition);
+    }
+    nav a:hover {
+      border-bottom: 2px solid var(--primary);
+    }
+    @media (max-width: 900px) {
+      header { padding: 30px 0 8px 0; }
+      nav ul { gap: 16px; }
     }
     @media (max-width: 768px) {
       .nav-toggle { display: block; }
@@ -89,14 +136,14 @@
       nav ul {
         position: fixed;
         top: 0; right: 0;
-        height: 100vh; width: 200px;
-        background: #f0f8ff;
+        height: 100vh; width: 220px;
+        background: var(--bg);
         flex-direction: column;
         align-items: center;
         justify-content: center;
         transform: translateX(100%);
-        transition: transform 0.3s;
-        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        transition: transform var(--transition);
+        box-shadow: -2px 0 8px rgba(30,144,255,0.13);
         z-index: 1;
       }
       .nav-toggle:checked + .nav-toggle-label span { background: transparent; }
@@ -107,59 +154,116 @@
         transform: rotate(-45deg); top: 0;
       }
       .nav-toggle:checked ~ nav ul { transform: translateX(0); }
-      nav li { margin: 20px 0; }
+      nav li { margin: 22px 0; }
       nav a { font-size: 1.2rem; }
     }
+
     main {
       width: 100%;
-      max-width: 900px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 10px;
-      padding: 30px;
-      box-shadow: 0 8px 32px 0 rgba(30,144,255,0.18);
-      backdrop-filter: blur(8px);
+      max-width: 1000px;
+      background: rgba(255,255,255,0.96);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      box-shadow: var(--shadow);
       margin-bottom: 40px;
-      color: #003366;
+      color: var(--text);
+      position: relative;
+      z-index: 0;
     }
-    section { margin-bottom: 40px; }
+    section { margin-bottom: 50px; }
     section h2 {
       font-size: 2rem;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #1e90ff;
-      padding-bottom: 5px;
+      margin-bottom: 22px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
+    /* 기술스택 그리드 */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 22px;
+      margin-bottom: 18px;
+      margin-top: 10px;
+    }
+    .skill-card {
+      background: linear-gradient(120deg, var(--card-bg) 80%, #c6f7f7 100%);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(30,144,255,0.08);
+      padding: 18px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 8px 25px rgba(30,144,255,0.19);
+      background: linear-gradient(120deg, #d0f0ff 80%, #b0f7e5 100%);
+    }
+    .skill-card .icon {
+      font-size: 2.8rem;
+      margin-bottom: 7px;
+      color: var(--primary-dark);
+      filter: drop-shadow(0 2px 2px #aee);
+    }
+    .skill-card .name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .skill-card .level {
+      font-size: 0.95rem;
+      color: #2ab;
+      font-weight: 500;
+    }
+
     /* 프로젝트 카드형 그리드 */
     .projects ul {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
       padding: 0;
       list-style: none;
     }
     .projects li {
-      background: #e6f0ff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 15px rgba(30,144,255,0.18);
-      transition: transform 0.3s, box-shadow 0.3s;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 22px 18px;
+      box-shadow: 0 4px 15px rgba(30,144,255,0.13);
+      transition: transform var(--transition), box-shadow var(--transition);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      border-left: 5px solid var(--primary);
+      position: relative;
+      overflow: hidden;
     }
     .projects li:hover {
       transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 8px 25px rgba(30,144,255,0.28);
+      box-shadow: 0 10px 28px rgba(30,144,255,0.24);
+      background: #fafdff;
     }
     .projects a {
-      color: #003366;
+      color: var(--primary-dark);
       font-weight: 700;
       text-decoration: underline;
       margin-bottom: 10px;
-      font-size: 1.1rem;
+      font-size: 1.18rem;
     }
+    .projects span {
+      font-size: 1.05rem;
+      color: #266;
+    }
+
     /* 연락처 섹션 */
     .contact p { font-size: 1.1rem; margin: 8px 0; }
-    .contact a { color: #1e90ff; }
+    .contact a { color: var(--primary); }
     /* 연락처 폼 */
     .contact form {
       display: flex;
@@ -172,50 +276,63 @@
       font-weight: 600;
       margin-bottom: 5px;
     }
-    .contact input {
+    .contact input, .contact textarea {
       padding: 10px;
-      border: 1px solid #1e90ff;
+      border: 1px solid var(--primary);
       border-radius: 5px;
       font-size: 1rem;
-      transition: border-color 0.3s;
+      transition: border-color var(--transition);
+      background: #fafdff;
     }
-    .contact input:focus {
-      border-color: #104e8b;
+    .contact input:focus, .contact textarea:focus {
+      border-color: var(--primary-dark);
       outline: none;
     }
     .contact button {
-      background: #1e90ff;
+      background: var(--primary);
       color: white;
       border: none;
       padding: 12px;
       border-radius: 5px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background var(--transition);
+      font-weight: bold;
     }
     .contact button:hover {
-      background: #104e8b;
+      background: var(--primary-dark);
+    }
+    .contact textarea {
+      min-height: 70px;
+      resize: vertical;
     }
     @media (max-width: 600px) {
-      header h1 { font-size: 2.2rem; }
-      main { padding: 20px; }
+      header h1 { font-size: 2rem; }
+      main { padding: 16px; }
       .contact form { max-width: 100%; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
     }
     footer {
       width: 100%;
-      max-width: 900px;
+      max-width: 1000px;
       text-align: center;
       padding: 20px 0;
       border-top: 1px solid #336699;
       color: #336699;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      background: rgba(255,255,255,0.8);
+      border-radius: 0 0 var(--radius) var(--radius);
+      margin-bottom: 10px;
     }
   </style>
+  <!-- 아이콘: FontAwesome CDN -->
+  <script src="https://kit.fontawesome.com/7a3e5e8b1a.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
-    <h1>홍길동</h1>
+    <h1>이현수</h1>
     <p>상위 1% 개발자 | 프론트엔드 & 백엔드 전문가</p>
+    <div class="info">2003년 5월 28일생</div>
     <input type="checkbox" id="nav-toggle" class="nav-toggle" />
     <label for="nav-toggle" class="nav-toggle-label">
       <span></span>
@@ -223,6 +340,7 @@
     <nav>
       <ul>
         <li><a href="#about">소개</a></li>
+        <li><a href="#skills">기술스택</a></li>
         <li><a href="#projects">프로젝트</a></li>
         <li><a href="#contact">연락처</a></li>
       </ul>
@@ -231,22 +349,84 @@
   <main>
     <section id="about">
       <h2>소개</h2>
-      <p>안녕하세요! 저는 최신 웹 기술과 클린 코드를 중시하는 상위 1% 개발자 홍길동입니다. 다양한 프로젝트 경험과 깊은 기술적 이해를 바탕으로 고품질의 웹 애플리케이션을 개발합니다.</p>
+      <p>
+        안녕하세요! 저는 최신 웹 기술과 클린 코드를 중시하는 상위 1% 개발자 <b>이현수</b>입니다.<br/>
+        다양한 대규모 서비스 경험과 깊은 기술적 이해, 그리고 <b>UI/UX</b>에 대한 감각을 바탕으로<br/>
+        <span style="color:var(--primary);font-weight:600;">고품질의 웹 애플리케이션</span>을 개발합니다.<br/>
+        <span style="color:var(--accent);">문제 해결력</span>과 <span style="color:var(--primary);">팀워크</span>를 모두 갖춘 개발자입니다.
+      </p>
     </section>
+
+    <section id="skills">
+      <h2>기술스택</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="icon"><i class="fab fa-html5"></i></div>
+          <div class="name">HTML5</div>
+          <div class="level">상급</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fab fa-css3-alt"></i></div>
+          <div class="name">CSS3 / SCSS</div>
+          <div class="level">상급</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fab fa-js"></i></div>
+          <div class="name">JavaScript (ES6+)</div>
+          <div class="level">상급</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fab fa-react"></i></div>
+          <div class="name">React</div>
+          <div class="level">상급</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fab fa-node-js"></i></div>
+          <div class="name">Node.js</div>
+          <div class="level">중상급</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-database"></i></div>
+          <div class="name">MongoDB / MySQL</div>
+          <div class="level">중상급</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fab fa-aws"></i></div>
+          <div class="name">AWS</div>
+          <div class="level">중상급</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-server"></i></div>
+          <div class="name">RESTful API</div>
+          <div class="level">상급</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fab fa-git-alt"></i></div>
+          <div class="name">Git / Github</div>
+          <div class="level">상급</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+          <div class="name">반응형 UI</div>
+          <div class="level">상급</div>
+        </div>
+      </div>
+    </section>
+
     <section id="projects" class="projects">
       <h2>프로젝트</h2>
       <ul>
         <li>
           <a href="https://github.com/username/project1" target="_blank" rel="noopener">Project 1</a>
-          <span>React 기반 대규모 SPA 개발</span>
+          <span>React 기반 대규모 SPA 개발 (고급 상태관리, 코드 스플리팅, 퍼포먼스 최적화)</span>
         </li>
         <li>
           <a href="https://github.com/username/project2" target="_blank" rel="noopener">Project 2</a>
-          <span>Node.js와 Express를 활용한 RESTful API 서버</span>
+          <span>Node.js와 Express를 활용한 RESTful API 서버 (JWT 인증, 실시간 알림)</span>
         </li>
         <li>
           <a href="https://github.com/username/project3" target="_blank" rel="noopener">Project 3</a>
-          <span>AWS Lambda를 이용한 서버리스 아키텍처 구축</span>
+          <span>AWS Lambda를 이용한 서버리스 아키텍처 구축 (비용 최적화, 자동화 배포)</span>
         </li>
       </ul>
     </section>
@@ -261,13 +441,13 @@
         <label for="email">이메일</label>
         <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" />
         <label for="message">메시지</label>
-        <input type="text" id="message" name="message" placeholder="메시지를 입력하세요" />
+        <textarea id="message" name="message" placeholder="메시지를 입력하세요"></textarea>
         <button type="submit">보내기</button>
       </form>
     </section>
   </main>
   <footer>
-    &copy; 2025 홍길동. All rights reserved.
+    &copy; 2025 이현수. All rights reserved.
   </footer>
 </body>
 </html>
