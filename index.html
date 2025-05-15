@@ -3,268 +3,261 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>상위 1% 개발자 이현수 포트폴리오</title>
+  <title>이현수 | Google-level Interactive Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     :root {
       --primary: #1e90ff;
-      --primary-dark: #104e8b;
-      --bg: #f0f8ff;
-      --card-bg: #e6f0ff;
       --accent: #00c6ae;
+      --bg: #f0f8ff;
+      --bg-glass: rgba(255,255,255,0.85);
       --text: #003366;
+      --card-bg: #e6f0ff;
       --shadow: 0 8px 32px 0 rgba(30,144,255,0.18);
-      --radius: 14px;
+      --radius: 16px;
       --transition: 0.3s cubic-bezier(.4,2,.6,1);
+      --gradient: linear-gradient(120deg, #1e90ff 0%, #00c6ae 100%);
+    }
+    [data-theme="dark"] {
+      --primary: #00c6ae;
+      --accent: #1e90ff;
+      --bg: #151c23;
+      --bg-glass: rgba(25,30,38,0.93);
+      --text: #e6f0ff;
+      --card-bg: #22303a;
+      --shadow: 0 8px 32px 0 rgba(0,198,174,0.18);
+      --gradient: linear-gradient(120deg, #00c6ae 0%, #1e90ff 100%);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, var(--bg) 60%, #ecf9ff 100%);
+      background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
-      transition: background 0.5s;
+      padding: 0;
+      transition: background 0.5s, color 0.5s;
     }
-    a {
+    .theme-toggle {
+      position: fixed;
+      top: 24px;
+      right: 36px;
+      z-index: 99;
+      background: var(--bg-glass);
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      transition: background 0.3s;
+    }
+    .theme-toggle i {
+      font-size: 1.5rem;
       color: var(--primary);
-      text-decoration: none;
-      transition: color var(--transition);
+      transition: color 0.3s;
     }
-    a:hover { color: var(--primary-dark); }
-
     header {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
       text-align: center;
-      margin-bottom: 40px;
       position: relative;
-      padding: 40px 0 10px 0;
-      background: rgba(255,255,255,0.85);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      left: 50%; top: 0;
-      transform: translateX(-50%);
-      width: 120%;
-      height: 8px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      border-radius: 0 0 40px 40px;
-      opacity: 0.8;
-    }
-    header h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: var(--primary-dark);
-      margin-bottom: 8px;
-    }
-    header .info {
-      font-size: 1rem;
-      color: #666;
-      margin-bottom: 18px;
-    }
-
-    /* 네비게이션 */
-    .nav-toggle { display: none; }
-    .nav-toggle-label {
-      display: none;
-      position: absolute;
-      top: 30px; right: 30px;
-      height: 34px; width: 34px;
-      cursor: pointer;
+      padding: 0;
       z-index: 2;
     }
-    .nav-toggle-label span,
-    .nav-toggle-label span::before,
-    .nav-toggle-label span::after {
-      display: block;
-      background: var(--primary);
-      height: 4px;
-      width: 34px;
-      border-radius: 3px;
+    .hero-3d {
+      width: 100%;
+      height: 320px;
+      max-width: 600px;
+      margin: 0 auto 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
-      transition: all var(--transition);
+      z-index: 1;
+      border-radius: 0 0 40px 40px;
+      overflow: hidden;
+      background: var(--bg-glass);
+      box-shadow: var(--shadow);
     }
-    .nav-toggle-label span::before,
-    .nav-toggle-label span::after {
-      content: '';
-      position: absolute;
+    .hero-title {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      text-shadow: 0 2px 8px rgba(30,144,255,0.13);
+      z-index: 2;
+      position: relative;
     }
-    .nav-toggle-label span::before { top: -11px; }
-    .nav-toggle-label span::after { top: 11px; }
-    nav { position: relative; }
+    .hero-desc {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-weight: 500;
+      z-index: 2;
+    }
+    .hero-info {
+      font-size: 1.05rem;
+      color: #666;
+      margin-bottom: 18px;
+      z-index: 2;
+    }
+    nav {
+      margin: 30px 0 0 0;
+      z-index: 2;
+    }
     nav ul {
       display: flex;
       justify-content: center;
       list-style: none;
-      gap: 30px;
-      font-size: 1.1rem;
+      gap: 40px;
+      font-size: 1.08rem;
       font-weight: 500;
-      margin-bottom: 0;
     }
-    nav li { }
     nav a {
-      padding: 10px 0 6px 0;
+      color: var(--primary);
+      padding: 8px 0;
       border-bottom: 2px solid transparent;
-      transition: border-color var(--transition);
+      transition: border-color var(--transition), color var(--transition);
+      letter-spacing: 0.5px;
     }
     nav a:hover {
       border-bottom: 2px solid var(--primary);
+      color: var(--accent);
     }
-    @media (max-width: 900px) {
-      header { padding: 30px 0 8px 0; }
-      nav ul { gap: 16px; }
-    }
-    @media (max-width: 768px) {
-      .nav-toggle { display: block; }
-      .nav-toggle-label { display: block; }
-      nav ul {
-        position: fixed;
-        top: 0; right: 0;
-        height: 100vh; width: 220px;
-        background: var(--bg);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transform: translateX(100%);
-        transition: transform var(--transition);
-        box-shadow: -2px 0 8px rgba(30,144,255,0.13);
-        z-index: 1;
-      }
-      .nav-toggle:checked + .nav-toggle-label span { background: transparent; }
-      .nav-toggle:checked + .nav-toggle-label span::before {
-        transform: rotate(45deg); top: 0;
-      }
-      .nav-toggle:checked + .nav-toggle-label span::after {
-        transform: rotate(-45deg); top: 0;
-      }
-      .nav-toggle:checked ~ nav ul { transform: translateX(0); }
-      nav li { margin: 22px 0; }
-      nav a { font-size: 1.2rem; }
-    }
-
     main {
       width: 100%;
-      max-width: 1000px;
-      background: rgba(255,255,255,0.96);
+      max-width: 1100px;
+      background: var(--bg-glass);
       border-radius: var(--radius);
-      padding: 36px 40px;
+      padding: 40px 48px;
       box-shadow: var(--shadow);
       margin-bottom: 40px;
       color: var(--text);
       position: relative;
-      z-index: 0;
+      z-index: 1;
+      margin-top: -60px;
     }
-    section { margin-bottom: 50px; }
+    section { margin-bottom: 60px; }
     section h2 {
-      font-size: 2rem;
-      margin-bottom: 22px;
-      border-bottom: 2px solid var(--primary);
-      padding-bottom: 6px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
+      font-size: 2.05rem;
+      margin-bottom: 26px;
+      background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
-
-    /* 기술스택 그리드 */
+    /* Bento Grid Skills */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 24px;
       margin-bottom: 18px;
       margin-top: 10px;
     }
     .skill-card {
-      background: linear-gradient(120deg, var(--card-bg) 80%, #c6f7f7 100%);
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(30,144,255,0.08);
-      padding: 18px 10px;
+      background: var(--card-bg);
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(30,144,255,0.09);
+      padding: 22px 10px 18px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform var(--transition), box-shadow var(--transition);
+      transition: transform var(--transition), box-shadow var(--transition), background 0.3s;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
     }
     .skill-card:hover {
-      transform: translateY(-6px) scale(1.04);
-      box-shadow: 0 8px 25px rgba(30,144,255,0.19);
+      transform: translateY(-6px) scale(1.04) rotateZ(-2deg);
+      box-shadow: 0 8px 25px rgba(30,144,255,0.13);
       background: linear-gradient(120deg, #d0f0ff 80%, #b0f7e5 100%);
+      border: 2px solid var(--primary);
+    }
+    [data-theme="dark"] .skill-card:hover {
+      background: linear-gradient(120deg, #22303a 80%, #00c6ae22 100%);
     }
     .skill-card .icon {
       font-size: 2.8rem;
       margin-bottom: 7px;
-      color: var(--primary-dark);
+      color: var(--primary);
       filter: drop-shadow(0 2px 2px #aee);
+      transition: color 0.3s;
     }
     .skill-card .name {
-      font-size: 1.05rem;
+      font-size: 1.13rem;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
+      letter-spacing: 0.5px;
     }
     .skill-card .level {
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       color: #2ab;
       font-weight: 500;
+      letter-spacing: 0.2px;
     }
-
-    /* 프로젝트 카드형 그리드 */
+    /* Projects */
     .projects ul {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
       padding: 0;
       list-style: none;
     }
     .projects li {
       background: var(--card-bg);
-      border-radius: 12px;
-      padding: 22px 18px;
+      border-radius: 16px;
+      padding: 28px 22px 22px 22px;
       box-shadow: 0 4px 15px rgba(30,144,255,0.13);
-      transition: transform var(--transition), box-shadow var(--transition);
+      transition: transform var(--transition), box-shadow var(--transition), background 0.3s;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      border-left: 5px solid var(--primary);
+      border-left: 6px solid var(--primary);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
     .projects li:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 10px 28px rgba(30,144,255,0.24);
+      transform: translateY(-8px) scale(1.03) rotateZ(1deg);
+      box-shadow: 0 12px 32px rgba(30,144,255,0.19);
       background: #fafdff;
+      border-left: 6px solid var(--accent);
+    }
+    [data-theme="dark"] .projects li:hover {
+      background: #1a2732;
     }
     .projects a {
-      color: var(--primary-dark);
+      color: var(--primary);
       font-weight: 700;
       text-decoration: underline;
-      margin-bottom: 10px;
-      font-size: 1.18rem;
+      margin-bottom: 12px;
+      font-size: 1.19rem;
+      letter-spacing: 0.5px;
     }
     .projects span {
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       color: #266;
+      margin-bottom: 8px;
+      display: block;
     }
-
-    /* 연락처 섹션 */
+    /* Contact */
     .contact p { font-size: 1.1rem; margin: 8px 0; }
     .contact a { color: var(--primary); }
-    /* 연락처 폼 */
     .contact form {
       display: flex;
       flex-direction: column;
@@ -279,64 +272,84 @@
     .contact input, .contact textarea {
       padding: 10px;
       border: 1px solid var(--primary);
-      border-radius: 5px;
+      border-radius: 7px;
       font-size: 1rem;
-      transition: border-color var(--transition);
+      transition: border-color 0.3s;
       background: #fafdff;
     }
+    [data-theme="dark"] .contact input,
+    [data-theme="dark"] .contact textarea {
+      background: #1a2732;
+      color: #e6f0ff;
+    }
     .contact input:focus, .contact textarea:focus {
-      border-color: var(--primary-dark);
+      border-color: var(--accent);
       outline: none;
     }
     .contact button {
       background: var(--primary);
       color: white;
       border: none;
-      padding: 12px;
-      border-radius: 5px;
-      font-size: 1rem;
+      padding: 13px;
+      border-radius: 7px;
+      font-size: 1.08rem;
       cursor: pointer;
-      transition: background var(--transition);
+      transition: background 0.3s;
       font-weight: bold;
+      letter-spacing: 0.5px;
     }
     .contact button:hover {
-      background: var(--primary-dark);
+      background: var(--accent);
     }
     .contact textarea {
       min-height: 70px;
       resize: vertical;
     }
+    @media (max-width: 900px) {
+      main { padding: 20px 8vw; }
+      .hero-3d { height: 220px; }
+    }
     @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
-      main { padding: 16px; }
-      .contact form { max-width: 100%; }
+      .hero-title { font-size: 2rem; }
+      main { padding: 10px 2vw; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
+      section h2 { font-size: 1.3rem; }
+      nav ul { gap: 16px; }
     }
     footer {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1100px;
       text-align: center;
-      padding: 20px 0;
+      padding: 18px 0 10px 0;
       border-top: 1px solid #336699;
       color: #336699;
-      font-size: 0.95rem;
-      background: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      background: var(--bg-glass);
       border-radius: 0 0 var(--radius) var(--radius);
       margin-bottom: 10px;
     }
+    /* Glassmorphism effect */
+    .glass {
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 rgba(30,144,255,0.07);
+      border-radius: var(--radius);
+      border: 1px solid rgba(30,144,255,0.09);
+    }
   </style>
-  <!-- 아이콘: FontAwesome CDN -->
-  <script src="https://kit.fontawesome.com/7a3e5e8b1a.js" crossorigin="anonymous"></script>
+  <!-- Three.js CDN -->
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
 </head>
 <body>
+  <button class="theme-toggle" id="themeToggle" title="다크/라이트 모드 전환">
+    <i class="fas fa-moon"></i>
+  </button>
   <header>
-    <h1>이현수</h1>
-    <p>상위 1% 개발자 | 프론트엔드 & 백엔드 전문가</p>
-    <div class="info">2003년 5월 28일생</div>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-    <label for="nav-toggle" class="nav-toggle-label">
-      <span></span>
-    </label>
+    <div class="hero-3d glass" id="hero3d"></div>
+    <div class="hero-title">이현수</div>
+    <div class="hero-desc">상위 1% 개발자 | 프론트엔드 & 백엔드 전문가</div>
+    <div class="hero-info">2003년 5월 28일생</div>
     <nav>
       <ul>
         <li><a href="#about">소개</a></li>
@@ -351,68 +364,76 @@
       <h2>소개</h2>
       <p>
         안녕하세요! 저는 최신 웹 기술과 클린 코드를 중시하는 상위 1% 개발자 <b>이현수</b>입니다.<br/>
-        다양한 대규모 서비스 경험과 깊은 기술적 이해, 그리고 <b>UI/UX</b>에 대한 감각을 바탕으로<br/>
-        <span style="color:var(--primary);font-weight:600;">고품질의 웹 애플리케이션</span>을 개발합니다.<br/>
-        <span style="color:var(--accent);">문제 해결력</span>과 <span style="color:var(--primary);">팀워크</span>를 모두 갖춘 개발자입니다.
+        <span style="color:var(--primary);font-weight:600;">몰입감 있는 3D UI, 인터랙티브 웹, AI·백엔드·클라우드까지</span> 전방위로 다루며,<br/>
+        <span style="color:var(--accent);">문제 해결력</span>과 <span style="color:var(--primary);">팀워크</span>를 모두 갖춘 개발자입니다.<br/>
+        <span style="font-weight:600;">“코드는 예술이다!”</span>라는 신념으로, 사용자를 감동시키는 경험을 만듭니다.
       </p>
     </section>
-
     <section id="skills">
       <h2>기술스택</h2>
       <div class="skills-grid">
-        <div class="skill-card">
+        <div class="skill-card" title="HTML5">
           <div class="icon"><i class="fab fa-html5"></i></div>
           <div class="name">HTML5</div>
           <div class="level">상급</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card" title="CSS3 / SCSS">
           <div class="icon"><i class="fab fa-css3-alt"></i></div>
           <div class="name">CSS3 / SCSS</div>
           <div class="level">상급</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card" title="JavaScript">
           <div class="icon"><i class="fab fa-js"></i></div>
           <div class="name">JavaScript (ES6+)</div>
           <div class="level">상급</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card" title="TypeScript">
+          <div class="icon"><i class="fab fa-js"></i></div>
+          <div class="name">TypeScript</div>
+          <div class="level">중상급</div>
+        </div>
+        <div class="skill-card" title="React">
           <div class="icon"><i class="fab fa-react"></i></div>
           <div class="name">React</div>
           <div class="level">상급</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card" title="Node.js">
           <div class="icon"><i class="fab fa-node-js"></i></div>
           <div class="name">Node.js</div>
           <div class="level">중상급</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card" title="MongoDB / MySQL">
           <div class="icon"><i class="fas fa-database"></i></div>
           <div class="name">MongoDB / MySQL</div>
           <div class="level">중상급</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card" title="AWS">
           <div class="icon"><i class="fab fa-aws"></i></div>
           <div class="name">AWS</div>
           <div class="level">중상급</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card" title="RESTful API">
           <div class="icon"><i class="fas fa-server"></i></div>
           <div class="name">RESTful API</div>
           <div class="level">상급</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card" title="Git">
           <div class="icon"><i class="fab fa-git-alt"></i></div>
           <div class="name">Git / Github</div>
           <div class="level">상급</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card" title="반응형 UI">
           <div class="icon"><i class="fas fa-mobile-alt"></i></div>
           <div class="name">반응형 UI</div>
           <div class="level">상급</div>
         </div>
+        <div class="skill-card" title="Three.js">
+          <div class="icon"><i class="fab fa-unity"></i></div>
+          <div class="name">Three.js</div>
+          <div class="level">중상급</div>
+        </div>
       </div>
     </section>
-
     <section id="projects" class="projects">
       <h2>프로젝트</h2>
       <ul>
@@ -449,5 +470,103 @@
   <footer>
     &copy; 2025 이현수. All rights reserved.
   </footer>
+  <script>
+    // 다크/라이트 모드 토글
+    const themeToggle = document.getElementById('themeToggle');
+    const icon = themeToggle.querySelector('i');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('theme', theme);
+    }
+    themeToggle.onclick = () => {
+      const now = document.documentElement.getAttribute('data-theme');
+      setTheme(now === 'dark' ? 'light' : 'dark');
+    };
+    // 초기 테마
+    (() => {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(saved || (prefersDark ? 'dark' : 'light'));
+    })();
+
+    // Hero 3D (Three.js) - 회전 큐브에 'HS' 이니셜
+    let scene, camera, renderer, cube, animateId;
+    function init3D() {
+      const container = document.getElementById('hero3d');
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(container.offsetWidth, container.offsetHeight);
+      renderer.setClearColor(0x000000, 0);
+      container.appendChild(renderer.domElement);
+
+      // 큐브 재질: 네온 그라데이션
+      const canvas = document.createElement('canvas');
+      canvas.width = 256; canvas.height = 256;
+      const ctx = canvas.getContext('2d');
+      // 그라데이션 배경
+      const grad = ctx.createLinearGradient(0,0,256,256);
+      grad.addColorStop(0, "#1e90ff");
+      grad.addColorStop(1, "#00c6ae");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,256,256);
+      // 이니셜
+      ctx.font = "bold 120px Arial";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.shadowColor = "#fff";
+      ctx.shadowBlur = 18;
+      ctx.fillStyle = "#fff";
+      ctx.fillText("HS", 128, 128);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      const geometry = new THREE.BoxGeometry(2,2,2);
+      const material = new THREE.MeshStandardMaterial({ map: texture, roughness: 0.3, metalness: 0.7 });
+      cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      // 빛
+      const light1 = new THREE.PointLight(0xffffff, 0.8);
+      light1.position.set(5,5,5);
+      scene.add(light1);
+      const light2 = new THREE.PointLight(0x00c6ae, 0.5);
+      light2.position.set(-5,-5,5);
+      scene.add(light2);
+
+      camera.position.z = 5;
+
+      // 반응형
+      window.addEventListener('resize', () => {
+        renderer.setSize(container.offsetWidth, container.offsetHeight);
+        camera.aspect = container.offsetWidth / container.offsetHeight;
+        camera.updateProjectionMatrix();
+      });
+
+      animate();
+    }
+    function animate() {
+      animateId = requestAnimationFrame(animate);
+      cube.rotation.x += 0.008;
+      cube.rotation.y += 0.012;
+      renderer.render(scene, camera);
+    }
+    window.addEventListener('DOMContentLoaded', init3D);
+
+    // 스킬카드 인터랙션: 클릭 시 카드가 살짝 튕기며 강조
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.skill-card').forEach(card => {
+        card.addEventListener('mousedown', () => {
+          card.style.transform += ' scale(0.97)';
+        });
+        card.addEventListener('mouseup', () => {
+          card.style.transform = '';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
